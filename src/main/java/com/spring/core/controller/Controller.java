@@ -38,14 +38,39 @@ public class Controller {
 	
 	@GetMapping("/getAllUsers")
 	public ResponseEntity<List<User>> getAllUsers() {
+		
 		return userService.getAllUsersService();		// fetching all users
 	}
 	
-	@GetMapping("/getUser/{id}")
-	public ResponseEntity<User> getUser(@PathVariable("id") int id) {
-		return userService.getUserService(id);			// fetching single user after searching using id
+	@GetMapping("/getUserById/{id}")
+	public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
+		return userService.getUserByIdService(id);			// fetching single user after searching using id
 	}
 	
+	// Derived Query Method 
+	@GetMapping("/getUserByName/{name}")
+	public ResponseEntity<User> getUserByName(@PathVariable("name") String name) {
+		return userService.getUserByNameService(name);			// fetching single user after searching using name
+	}
+	
+	// Derived Query Method Services
+	@GetMapping("/getUserByCity/{city}")
+	public ResponseEntity<User> getUserByCity(@PathVariable("city") String city) {
+		return userService.getUserByCityService(city);			// fetching single user after searching using name
+	}
+	
+	// Derived Query Method Services
+	@GetMapping("/getUserByNameAndStatus/{name}/{status}")
+	public ResponseEntity<List<User>> getUserByNameAndStatus(@PathVariable("name") String name, @PathVariable("status") String status){
+		return userService.getUserByNameAndStatusService(name, status);
+	}
+	
+	
+	// Derived Query Method Services
+	@GetMapping("/getUsersMatchingStatus/{status}")
+	public ResponseEntity<List<User>> getUsersMatchingStatus(@PathVariable("status") String status){
+		return userService.getUsersMatchingStatusService(status);
+	}
 	
 	
 	@DeleteMapping("/deleteUsers")
